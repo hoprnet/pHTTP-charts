@@ -2,6 +2,7 @@
 participant User as user
 entity "pHTTP-lib" as phttplib
 entity "DiscoveryPlatform" as dp
+entity "AvailabilityMonitor" as am
 database "pHTTP-db" as phttpdb
 entity "hoprd entry node" as entry
 collections "hoprd hop nodes" as hop
@@ -9,9 +10,14 @@ entity "hoprd exit node" as exit
 entity "pHTTP-exit-app" as phttpexitapp
 boundary "external services" as services
 
+
+am -> phttpdb: read nodes
+phttpdb -> am
+am -> phttpdb: write routes
+
 user -> phttplib : instantiate
 phttplib -> dp: request routes
-dp -> phttpdb
+dp -> phttpdb: read routes
 phttpdb -> dp
 dp -> phttplib: routes
 user -> phttplib: http request
