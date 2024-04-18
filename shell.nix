@@ -13,6 +13,7 @@ in
 with pkgs;
 mkShell {
   nativeBuildInputs = [
+    just
     plantuml
 
     # custom pkg groups
