@@ -1,3 +1,4 @@
 # direnv cache
 .direnv/
 *.png
+!assets/*
