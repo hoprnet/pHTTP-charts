@@ -1,4 +1,4 @@
-# pHTTP charts
+# pHTTP diagrams
 
 Run `just b` to generate charts.
 
