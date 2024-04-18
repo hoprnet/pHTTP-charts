@@ -1,0 +1,44 @@
+@startuml
+
+
+package "HOPR internal" {
+[DiscoveryPlatform]
+[AvailabilityMonitor]
+}
+
+package "Entry nodes" {
+    [hoprd-e1]
+    [hoprd-e2]
+    [hoprd-eX]
+}
+
+package "Exit nodes" {
+    [hoprd-x1]
+    [hoprd-x2]
+    [hoprd-xX]
+}
+
+package "Exit applications" {
+    [exit-app-1]
+    [exit-app-2]
+    [exit-app-X]
+}
+
+package "pHTTP" {
+    [pHTTP lib]
+}
+
+database "pHTTP DB" {
+}
+
+[DiscoveryPlatform] --> "pHTTP DB"
+[AvailabilityMonitor] --> "pHTTP DB"
+[pHTTP lib] --> [DiscoveryPlatform]
+[pHTTP lib] --> "Entry nodes"
+[exit-app-1] --> [hoprd-x1]
+[exit-app-2] --> [hoprd-x2]
+[exit-app-X] --> [hoprd-xX]
+"Entry nodes" --> "1hop"
+"1hop" --> "Exit nodes"
+
+@enduml
