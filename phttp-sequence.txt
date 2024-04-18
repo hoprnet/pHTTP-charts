@@ -36,5 +36,6 @@ hop -> entry
 phttplib -> entry: polling response
 entry -> phttplib: http response
 phttplib -> user: http response
+phttpexitapp --> dp: reporting quota usage
 
 @enduml
