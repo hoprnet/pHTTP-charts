@@ -1,13 +1,13 @@
-# pHTTP diagrams
+# u(nlinked)HTTP diagrams
 
 Run `just b` to generate charts.
 
-- phttp-overview.png contains general overview and of the components involved
+- uhttp-overview.png contains general overview and of the components involved
 
 ## Overview
 
-![pHTTP overview](assets/phttp-overview.png)
+![uHTTP overview](assets/uhttp-overview.png)
 
 ## Sequence
 
-![pHTTP sequence](assets/phttp-sequence.png)
+![uHTTP sequence](assets/uhttp-sequence.png)

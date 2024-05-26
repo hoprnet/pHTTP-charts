@@ -24,17 +24,17 @@ package "Exit applications" {
     [exit-app-X]
 }
 
-package "pHTTP" {
-    [pHTTP lib]
+package "u(nlinked)HTTP" {
+    [uHTTP lib]
 }
 
-database "pHTTP DB" {
+database "uHTTP DB" {
 }
 
-[DiscoveryPlatform] --> "pHTTP DB"
-[AvailabilityMonitor] --> "pHTTP DB"
-[pHTTP lib] --> [DiscoveryPlatform]
-[pHTTP lib] --> "Entry nodes"
+[DiscoveryPlatform] --> "uHTTP DB"
+[AvailabilityMonitor] --> "uHTTP DB"
+[uHTTP lib] --> [DiscoveryPlatform]
+[uHTTP lib] --> "Entry nodes"
 [exit-app-1] --> [hoprd-x1]
 [exit-app-2] --> [hoprd-x2]
 [exit-app-X] --> [hoprd-xX]

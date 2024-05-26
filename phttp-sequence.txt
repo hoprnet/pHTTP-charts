@@ -1,47 +1,47 @@
 @startuml
 participant User as user
-entity "pHTTP-lib" as phttplib
+entity "uHTTP-lib" as uhttplib
 entity "DiscoveryPlatform" as dp
 entity "AvailabilityMonitor" as am
-database "pHTTP-db" as phttpdb
+database "uHTTP-db" as uhttpdb
 entity "hoprd entry node" as entry
 collections "hoprd hop nodes" as hop
 entity "hoprd exit node" as exit
-entity "pHTTP-exit-app" as phttpexitapp
+entity "uHTTP-exit-app" as uhttpexitapp
 boundary "external services" as services
 
 
-am -> phttpdb: read nodes
-phttpdb -> am
-am -> phttpdb: write routes
+am -> uhttpdb: read nodes
+uhttpdb -> am
+am -> uhttpdb: write routes
 
-user -> phttplib : instantiate
-phttplib -> dp: request routes
-dp -> phttpdb: read routes
-phttpdb -> dp
-dp -> phttplib: routes
-user -> phttplib: http request
-phttplib -> entry: message segment 1
-phttplib -> entry: message segment 2
-phttplib -> entry: message segment x
+user -> uhttplib : instantiate
+uhttplib -> dp: request routes
+dp -> uhttpdb: read routes
+uhttpdb -> dp
+dp -> uhttplib: routes
+user -> uhttplib: http request
+uhttplib -> entry: message segment 1
+uhttplib -> entry: message segment 2
+uhttplib -> entry: message segment x
 entry -> hop
 hop -> exit
-exit -> phttpexitapp: message segment 1
-phttplib --> entry: polling response
-exit -> phttpexitapp: message segment 2
-exit -> phttpexitapp: message segment x
-phttpexitapp -> services: http request
-phttplib --> entry: polling response
-services -> phttpexitapp: http response
-phttpexitapp -> exit: message segment 1
-phttpexitapp -> exit: message segment 2
-phttplib --> entry: polling response
-phttpexitapp -> exit: message segment x
+exit -> uhttpexitapp: message segment 1
+uhttplib --> entry: polling response
+exit -> uhttpexitapp: message segment 2
+exit -> uhttpexitapp: message segment x
+uhttpexitapp -> services: http request
+uhttplib --> entry: polling response
+services -> uhttpexitapp: http response
+uhttpexitapp -> exit: message segment 1
+uhttpexitapp -> exit: message segment 2
+uhttplib --> entry: polling response
+uhttpexitapp -> exit: message segment x
 exit -> hop
 hop -> entry
-phttplib -> entry: polling response
-entry -> phttplib: http response
-phttplib -> user: http response
-phttpexitapp --> dp: reporting quota usage
+uhttplib -> entry: polling response
+entry -> uhttplib: http response
+uhttplib -> user: http response
+uhttpexitapp --> dp: reporting quota usage
 
 @enduml
