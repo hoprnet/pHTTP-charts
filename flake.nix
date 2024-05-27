@@ -1,5 +1,5 @@
 {
-  description = "p(rivate)HTTP library charts";
+  description = "u(nlinked)HTTP library charts";
 
   inputs.flake-utils.url = "github:numtide/flake-utils";
 

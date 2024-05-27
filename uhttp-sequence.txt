@@ -1,0 +1,47 @@
+@startuml
+participant User as user
+entity "uHTTP-lib" as uhttplib
+entity "DiscoveryPlatform" as dp
+entity "AvailabilityMonitor" as am
+database "uHTTP-db" as uhttpdb
+entity "hoprd entry node" as entry
+collections "hoprd hop nodes" as hop
+entity "hoprd exit node" as exit
+entity "uHTTP-exit-app" as uhttpexitapp
+boundary "external services" as services
+
+
+am -> uhttpdb: read nodes
+uhttpdb -> am
+am -> uhttpdb: write routes
+
+user -> uhttplib : instantiate
+uhttplib -> dp: request routes
+dp -> uhttpdb: read routes
+uhttpdb -> dp
+dp -> uhttplib: routes
+user -> uhttplib: http request
+uhttplib -> entry: message segment 1
+uhttplib -> entry: message segment 2
+uhttplib -> entry: message segment x
+entry -> hop
+hop -> exit
+exit -> uhttpexitapp: message segment 1
+uhttplib --> entry: polling response
+exit -> uhttpexitapp: message segment 2
+exit -> uhttpexitapp: message segment x
+uhttpexitapp -> services: http request
+uhttplib --> entry: polling response
+services -> uhttpexitapp: http response
+uhttpexitapp -> exit: message segment 1
+uhttpexitapp -> exit: message segment 2
+uhttplib --> entry: polling response
+uhttpexitapp -> exit: message segment x
+exit -> hop
+hop -> entry
+uhttplib -> entry: polling response
+entry -> uhttplib: http response
+uhttplib -> user: http response
+uhttpexitapp --> dp: reporting quota usage
+
+@enduml
